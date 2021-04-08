@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:tiktok_flutter/config/current_position/position.dart';
+import 'package:tiktok_flutter/httpRequest/http_request.dart';
 import 'package:tiktok_flutter/pages/home_page/attention_page/attention.dart';
 import 'package:tiktok_flutter/pages/home_page/position_page/position.dart';
 import 'package:tiktok_flutter/pages/home_page/recommend_page/recommend.dart';
@@ -27,13 +26,14 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high),
+        future: HttpRequest.request("https://restapi.amap.com/v3/geocode/regeo",
+            method: 'get',
+            params: {
+              "location": "117.01146,36.60033",
+              "key": "7ea0a637a236f5d70e8f5164f9dfae4f"
+            }),
         //determinePosition(),
         builder: (context, snapshot) {
-          print('position in here');
-          print(snapshot.data);
-          print('position out here');
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
@@ -51,17 +51,27 @@ class _HomePageState extends State<HomePage>
                 title: TabBar(
                     //生成Tab菜单
                     controller: _tabController,
-                    tabs: tabs.map((e) => Tab(text: e)).toList()),
+                    tabs: tabs.map((e) {
+                      if (snapshot.data != null && e == '地区') {
+                        return Tab(
+                            text: snapshot.data['regeocode']['addressComponent']
+                                ["district"]);
+                      } else {
+                        return Tab(text: e);
+                      }
+                    }).toList()),
               ),
-              body: TabBarView(
-                controller: _tabController,
-                children: _list.map((page) {
-                  return Container(
-                    alignment: Alignment.center,
-                    child: page,
-                  );
-                }).toList(),
-              ));
+              body: snapshot.data != null
+                  ? TabBarView(
+                      controller: _tabController,
+                      children: _list.map((page) {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: page,
+                        );
+                      }).toList(),
+                    )
+                  : Text('loading'));
         });
   }
 }

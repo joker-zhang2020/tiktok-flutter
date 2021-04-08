@@ -3,7 +3,6 @@ import 'package:tiktok_flutter/pages/friend_page/friend.dart';
 import 'package:tiktok_flutter/pages/message_page/message.dart';
 import 'package:tiktok_flutter/pages/mine_page/mine.dart';
 import 'package:tiktok_flutter/pages/record_video_page/record.dart';
-
 import 'home_page/home.dart';
 
 class HighComponent extends StatefulWidget {
@@ -41,10 +40,11 @@ class _HighComponentState extends State<HighComponent> {
         items: [
           BottomNavigationBarItem(
               label: '首页',
-              icon: Icon(Icons.nature, size: 0, color: Colors.white70)),
+              icon: Icon(Icons.hourglass_empty,
+                  size: 0, color: Colors.transparent)),
           BottomNavigationBarItem(
               label: '朋友',
-              icon: Icon(Icons.nature, size: 0, color: Colors.white70)),
+              icon: Icon(Icons.nature, size: 0, color: Colors.transparent)),
           BottomNavigationBarItem(
               label: '',
               icon: Icon(
@@ -52,10 +52,10 @@ class _HighComponentState extends State<HighComponent> {
               )),
           BottomNavigationBarItem(
               label: '消息',
-              icon: Icon(Icons.nature, size: 0, color: Colors.white70)),
+              icon: Icon(Icons.nature, size: 0, color: Colors.transparent)),
           BottomNavigationBarItem(
               label: '我',
-              icon: Icon(Icons.nature, size: 0, color: Colors.white70)),
+              icon: Icon(Icons.nature, size: 0, color: Colors.transparent)),
         ],
       ),
       body: _currentPage,

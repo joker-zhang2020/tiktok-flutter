@@ -10,8 +10,18 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('mine_page'),
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent, actions: [
+        Container(
+            margin: EdgeInsets.all(15.0),
+            child: Image.asset(
+              "asset/images/menu.png",
+              color: Colors.white,
+            ))
+      ]),
+      body: Container(
+        child: Text('friend_page'),
+      ),
     );
   }
 }

@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_flutter/httpRequest/http_config.dart';
 
 class HttpRequest {
-  static final BaseOptions baseOptions = BaseOptions(
-      baseUrl: HttpConfig.baseURL, connectTimeout: HttpConfig.timeout);
+  static final BaseOptions baseOptions =
+      BaseOptions(connectTimeout: HttpConfig.timeout);
   static final Dio dio = Dio(baseOptions);
 
   static Future<T> request<T>(String url,
